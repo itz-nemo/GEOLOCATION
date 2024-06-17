@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Geolocation with Map</title>
+  <!-- Leaflet CSS for the map -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      color: #333;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 20px 0;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    #map {
+      height: 500px;
+      width: 100%;
+      margin-top: 20px;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+    }
+    #coords {
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Geolocation with Map</h1>
+  <!-- Button to trigger geolocation -->
+  <button onclick="getLocation()">Get coords</button>
+  <!-- Heading to display coordinates -->
+  <h1 id="coords"></h1>
+  <!-- Div to display the map -->
+  <div id="map"></div>
+  <!-- Leaflet JS for the map -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    // Element to display coordinates
+    var x = document.getElementById('coords');
+
+    // Initialize the map with a starting view
+    var map = L.map('map').setView([51.505, -0.09], 3); // Initial view set to London
+
+    // Add a tile layer from OpenStreetMap
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Function to get the current geolocation
+    function getLocation() {
+      if (navigator.geolocation) {
+        // Get the current position and call showPosition
+        navigator.geolocation.getCurrentPosition(showPosition);
+      } else {
+        // If geolocation is not supported, display an error message
+        x.innerHTML = "Geolocation is not supported by this browser.";
+      }
+    }
+
+    // Function to display the position and update the map
+    function showPosition(position) {
+      // Get the latitude and longitude from the position object
+      var latitude = position.coords.latitude;
+      var longitude = position.coords.longitude;
+
+      // Display the coordinates
+      x.innerHTML = "Latitude: " + latitude + "<br>Longitude: " + longitude;
+
+      // Move the map to the current location with animation
+      map.flyTo([latitude, longitude], 13, {
+        animate: true,
+        duration: 2 // Animation duration in seconds
+      });
+
+      // Add a marker at the current location
+      L.marker([latitude, longitude]).addTo(map)
+        .bindPopup("You are here!") // Add a popup to the marker
+        .openPopup(); // Open the popup immediately
+    }
+  </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Geolocation with Map</title>
+  <!-- Leaflet CSS for the map -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      color: #333;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 20px 0;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    #map {
+      height: 500px;
+      width: 100%;
+      margin-top: 20px;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+    }
+    #coords {
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Geolocation with Map</h1>
+  <!-- Button to trigger geolocation -->
+  <button onclick="getLocation()">Get coords</button>
+  <!-- Heading to display coordinates -->
+  <h1 id="coords"></h1>
+  <!-- Div to display the map -->
+  <div id="map"></div>
+  <!-- Leaflet JS for the map -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    // Element to display coordinates
+    var x = document.getElementById('coords');
+
+    // Initialize the map with a starting view
+    var map = L.map('map').setView([51.505, -0.09], 3); // Initial view set to London
+
+    // Add a tile layer from OpenStreetMap
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Function to get the current geolocation
+    function getLocation() {
+      if (navigator.geolocation) {
+        // Get the current position and call showPosition
+        navigator.geolocation.getCurrentPosition(showPosition);
+      } else {
+        // If geolocation is not supported, display an error message
+        x.innerHTML = "Geolocation is not supported by this browser.";
+      }
+    }
+
+    // Function to display the position and update the map
+    function showPosition(position) {
+      // Get the latitude and longitude from the position object
+      var latitude = position.coords.latitude;
+      var longitude = position.coords.longitude;
+
+      // Display the coordinates
+      x.innerHTML = "Latitude: " + latitude + "<br>Longitude: " + longitude;
+
+      // Move the map to the current location with animation
+      map.flyTo([latitude, longitude], 13, {
+        animate: true,
+        duration: 2 // Animation duration in seconds
+      });
+
+      // Add a marker at the current location
+      L.marker([latitude, longitude]).addTo(map)
+        .bindPopup("You are here!") // Add a popup to the marker
+        .openPopup(); // Open the popup immediately
+    }
+  </script>
+</body>
+</html>
